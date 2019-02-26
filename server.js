@@ -12,12 +12,16 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
 
-
 app.get('/hello', proofOfLife);
+app.get('/', loadSearch);
 
 function proofOfLife (request, response) {
   response.render('pages/index');
   // app.use(express.static('./public'));
+}
+
+function loadSearch(request, response) {
+  response.render('pages/index');
 }
 
 // app.use('*', (request,response) => res.render('error'));
