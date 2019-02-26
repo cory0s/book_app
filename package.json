@@ -1,0 +1,26 @@
+{
+  "name": "book_app",
+  "version": "1.0.0",
+  "description": "we want to read books",
+  "main": "server.js",
+  "dependencies": {
+    "dotenv": "^6.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "testing"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cory0s/book_app.git"
+  },
+  "keywords": [
+    "na"
+  ],
+  "author": "Cory and Peter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cory0s/book_app/issues"
+  },
+  "homepage": "https://github.com/cory0s/book_app#readme"
+}
