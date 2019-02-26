@@ -16,8 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/hello', proofOfLife);
 
 function proofOfLife (request, response) {
-    response.render('pages/index');
-    // app.use(express.static('./public'));
+  response.render('pages/index');
+  // app.use(express.static('./public'));
 }
 
 // app.use('*', (request,response) => res.render('error'));
