@@ -10,7 +10,8 @@
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "nodemon": "^1.18.10",
-    "pg": "^7.8.1"
+    "pg": "^7.8.1",
+    "superagent": "^4.1.0"
   },
   "devDependencies": {},
   "scripts": {
