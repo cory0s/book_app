@@ -15,8 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 
 //ROUTES
 app.get('/hello', proofOfLife);
-app.get('/', loadSearch);
-app.post('/searches', createSearch);
+app.get('/newbooksearch', loadSearch);
+app.post('/searchResults', createSearch);
 
 //CONSTRUCTOR FUNCTIONS
 function Book(book){
@@ -36,7 +36,7 @@ function proofOfLife (request, response) {
 }
 
 function loadSearch(request, response) {
-  response.render('pages/index');
+  response.render('pages/searches/new');
 }
 
 function createSearch(request, response) {
@@ -50,7 +50,7 @@ function createSearch(request, response) {
   superagent.get(url)
     .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
     .then(results => response.render('pages/searches/show', { searchesResults: results}))
-    .catch(err => response.render('pages/error', {errorMessage : err}))
+    .catch(err => response.render('pages/ error', {errorMessage : err}))
 }
 
 //new Book(bookResult.volumeInfo)
