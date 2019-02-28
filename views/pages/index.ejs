@@ -1,30 +1,19 @@
-<!--
-    moved all of this to new.ejs
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Document</title>
+    <title>Book App</title>
     <link rel="stylesheet" type="text/css" href="../public/styles/base.css"/>
 </head>
 <body>
     <main>
-        <h1>Search by Title or Author</h1>
-        <form action="/searches" method="post">
-            <input type="text" name="search" placeholder="Enter a title or author" required>
-            <fieldset>
-                <label for="title">
-                    <span>Title</span>
-                    <input type="radio" name="search" value="title" required>
-                </label>
-            </fieldset>
-            <fieldset>
-                    <label for="author">
-                        <span>Author</span>
-                        <input type="radio" name="search" value="author" required>
-                    </label>
-            </fieldset>
-            <button type="submit">Seach the Google Books API</button>
-        </form>
+        <h1>Returned Search</h1>
+
+        <ul>
+            <%  books.forEach(book => { %>
+            <li> <%= book.title %> </li>
+            <% }) %>
+        </ul>
+
     </main>
 </body>
-</html> -->
+</html>
