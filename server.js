@@ -68,7 +68,6 @@ function proofCreateBook(request, response) {
   return client.query(SQL)
     .then(result => {
       console.log('From SQL');
-      console.log('CLIENT QUERY', client.query(SQL));
 
       response.render('pages/index', { books: result.rows } );
     })
