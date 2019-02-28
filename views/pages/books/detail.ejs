@@ -1,23 +1,10 @@
 <section>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Book App</title>
-    <link rel="stylesheet" type="text/css" href="../public/styles/base.css"/>
-</head>
-<body>
-    <main>
-        <h1>displaying your single book</h1>
+    <h1>displaying your single book</h1>
 
-        <ul>
-           <%= book.title %>
-           <%= book.author %>
-           <%= book.ISBN %>
-           <%= book.image_url %>
-           <%= book.description %>
-           <%= book.bookshelf_name %>
-        </ul>
-    </main>
-</body>
-</html>
+    <p>Title: <%= book.title %></p>
+    <p>Author: <%= book.author %></p>
+    <p>ISBN: <%= book.isbn %></p>
+    <p>Image: <%= book.image_url %></p>
+    <p>Description: <%= book.description %></p>
+    <p>Bookshelf: <%= book.bookshelf %></p>
 </section>
