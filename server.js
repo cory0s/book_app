@@ -24,7 +24,8 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/hello', proofOfLife);
 app.get('/newbooksearch', loadSearch);
 app.post('/searchResults', createSearch);
-app.get('/index', proofCreateBook);
+app.get('/index', getBooks);
+app.get('/books/:id', getSingleBook);
 
 //CONSTRUCTOR FUNCTIONS
 function Book(book){
@@ -61,8 +62,7 @@ function createSearch(request, response) {
     .catch(err => response.render('pages/ error', {errorMessage : err}))
 }
 
-function proofCreateBook(request, response) {
-  console.log('From proofCreateBook');
+function getBooks(request, response) {
   const SQL = `SELECT * FROM books;`;
 
   return client.query(SQL)
@@ -70,6 +70,19 @@ function proofCreateBook(request, response) {
       console.log('From SQL');
 
       response.render('pages/index', { books: result.rows } );
+    })
+    .catch(console.error);
+}
+
+function getSingleBook(request, response){
+  console.log('__________From getSingleBook', request.params.id);
+  let SQL = 'SELECT * FROM books WHERE id=$1;';
+  let values = [request.params.id];
+
+  return client.query(SQL, values)
+    .then(result => {
+      console.log('_________this is the result from client.query',result.rows)
+      return response.render('/pages/books/detail/', { book : result.rows});
     })
     .catch(console.error);
 }

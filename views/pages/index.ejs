@@ -11,10 +11,13 @@
 
         <ul>
             <%  books.forEach(book => { %>
-            <li> <%= book.title %> </li>
+            <li> <%= book.title %>
+                <%= book.author %>
+                <button> <a href="/books/<%=book.id%>"> View Detail </a> </button>
+            </li>
             <% }) %>
         </ul>
-
+ 
     </main>
 </body>
 </html>
