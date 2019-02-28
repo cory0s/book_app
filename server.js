@@ -59,7 +59,7 @@ function createSearch(request, response) {
   superagent.get(url)
     .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
     .then(results => response.render('pages/searches/show', { searchesResults: results}))
-    .catch(err => response.render('pages/ error', {errorMessage : err}))
+    .catch(err => response.render('pages/error', {errorMessage : err}))
 }
 
 function getBooks(request, response) {
@@ -82,7 +82,7 @@ function getSingleBook(request, response){
   return client.query(SQL, values)
     .then(result => {
       console.log('_________this is the result from client.query',result.rows)
-      return response.render('/pages/books/detail/', { book : result.rows});
+      return response.render('pages/books/show', { book : result.rows[0]});
     })
     .catch(console.error);
 }
