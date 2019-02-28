@@ -1,10 +1,17 @@
 const express = require('express');
-const Client = require('pg');
+const pg = require('pg');
 const superagent = require('superagent');
 const app = express();
-
 // const cors = require('cors');
 // app.use(cors());
+require('dotenv').config();
+
+//Database setup
+const client = new pg.Client(process.env.DATABASE_URL);
+client.connect();
+client.on('error', err => console.error(err));
+
+
 
 app.use(express.static('./public'));
 app.set('view engine', 'ejs');
@@ -17,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/hello', proofOfLife);
 app.get('/newbooksearch', loadSearch);
 app.post('/searchResults', createSearch);
+app.get('/index', proofCreateBook);
 
 //CONSTRUCTOR FUNCTIONS
 function Book(book){
@@ -51,6 +59,20 @@ function createSearch(request, response) {
     .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
     .then(results => response.render('pages/searches/show', { searchesResults: results}))
     .catch(err => response.render('pages/ error', {errorMessage : err}))
+}
+
+function proofCreateBook(request, response) {
+  console.log('From proofCreateBook');
+  const SQL = `SELECT * FROM books;`;
+
+  return client.query(SQL)
+    .then(result => {
+      console.log('From SQL');
+      console.log('CLIENT QUERY', client.query(SQL));
+
+      response.render('pages/index', { books: result.rows } );
+    })
+    .catch(console.error);
 }
 
 //new Book(bookResult.volumeInfo)
