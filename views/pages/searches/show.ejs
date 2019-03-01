@@ -13,12 +13,12 @@
             <%= book.title %>
             <button id="<%= index %>" class="book-details-button">View Book Details</button>
             <form action="/books" method="post" class="<%= index %>" id="book-details-form">
-                <input value="<%=book.title%>"></input>
-                <input value="<%=book.author%>"></input>
-                <input value="<%=book.ISBN%>" ></input>
-                <input value="<%=book.image_url%>" ></input>
-                <input value="<%=book.description%>" ></input>
-                <input value="<%=book.bookshelf%>" ></input>
+                <input value="<%=book.title%>" name="<%=book.title%>"></input>
+                <input value="<%=book.author%>" name="<%=book.author%>"></input>
+                <input value="<%=book.ISBN%>" name="<%=book.ISBN%>" ></input>
+                <input value="<%=book.image_url%>" name="<%=book.image_url%>" ></input>
+                <input value="<%=book.description%>" name="<%=book.description%>" ></input>
+                <input value="<%=book.bookshelf%>" name="<%=book.bookshelf%>" ></input>
                 <button type="submit">Add to My Books</button>
             </form>
             </div>
