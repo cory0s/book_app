@@ -1,0 +1,13 @@
+/* body {
+    background-color: red;
+} */
+
+
+ * {
+    font-size: 15px;
+    background-color: white;
+} 
+
+form{
+    display: none;
+}
