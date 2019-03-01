@@ -3,11 +3,11 @@
 } */
 
 
- * {
+* {
     font-size: 15px;
     background-color: white;
 } 
 
-form{
+#book-details-form{
     display: none;
 }

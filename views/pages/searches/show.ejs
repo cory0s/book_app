@@ -12,11 +12,11 @@
             <div>
             <%= book.title %>
             <button id="<%= index %>">Select this Book</button>
-            <form class="<%= index %>">
+            <form class="<%= index %>" id="book-details-form">
                 <input value="<%=book.title%>"></input>
                 <input value="<%=book.author%>"></input>
-                <input value="<%=book.ISBN%>"></input>
-                <input value="Enter Bookshelf Name"></input>
+                <input value="<%=book.ISBN%>" ></input>
+                <input value="Enter Bookshelf Name" ></input>
             </form>
             </div>
             <% }) %>
