@@ -2,6 +2,7 @@ const express = require('express');
 const pg = require('pg');
 const superagent = require('superagent');
 const app = express();
+var path = require('path');
 // const cors = require('cors');
 // app.use(cors());
 require('dotenv').config();
@@ -56,9 +57,13 @@ function createSearch(request, response) {
   if(request.body.search[1] === 'author') {url += `+inauthor:${request.body.search[0]}`;}
   console.log(url);
 
+  function clickHandler() {
+    console.log('ive been clicked');
+  }
+
   superagent.get(url)
     .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
-    .then(results => response.render('pages/searches/show', { searchesResults: results}))
+    .then(results => response.render('pages/searches/show', { searchesResults: results, clickHandler: clickHandler }))
     .catch(err => response.render('pages/error', {errorMessage : err}))
 }
 
@@ -86,6 +91,10 @@ function getSingleBook(request, response){
     })
     .catch(console.error);
 }
+
+//EVENT LISTENERS
+
+
 
 //new Book(bookResult.volumeInfo)
 // app.use('*', (request,response) => res.render('error'));

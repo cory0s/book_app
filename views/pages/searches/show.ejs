@@ -2,18 +2,32 @@
 <html lang="en">
 <head>
     <title>Book App</title>
-    <link rel="stylesheet" type="text/css" href="../public/styles/base.css"/>
+    <link rel="stylesheet" type="text/css" href="./styles/base.css"/>
 </head>
 <body>
     <main>
         <h1>Returned Search</h1>
 
-        <ul>
-            <%  searchesResults.forEach(book => { %>
-            <li> <%= book.title %> </li>
+            <%  searchesResults.forEach((book, index) => { %>
+            <div>
+            <%= book.title %>
+            <button id="<%= index %>">Select this Book</button>
+            <form class="<%= index %>">
+                <input value="<%=book.title%>"></input>
+                <input value="<%=book.author%>"></input>
+                <input value="<%=book.ISBN%>"></input>
+                <input value="Enter Bookshelf Name"></input>
+            </form>
+            </div>
             <% }) %>
-        </ul>
-
     </main>
 </body>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+    $('button').click(function (el) {
+        const elID = el.currentTarget.id;
+        $(`.${elID}`).toggle(300);
+    });
+</script>
 </html>
