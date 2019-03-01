@@ -26,6 +26,7 @@ app.get('/newbooksearch', loadSearch);
 app.post('/searchResults', createSearch);
 app.get('/index', getBooks);
 app.get('/books/:id', getSingleBook);
+// app.post('/books', addToDatabase);
 
 //CONSTRUCTOR FUNCTIONS
 function Book(book){
@@ -34,7 +35,7 @@ function Book(book){
   this.ISBN = book.ISBN || 'ISBN does not exist';
   this.image_url = book.imageLinks.smallThumbnail || 'Image does not exist';
   this.description = book.description || 'Description does not exist';
-  //this.bookshelf_name = book.body.volumeInfo.bookshelf_name || 'Shelf name does not exist';
+  this.bookshelf = 'Enter a bookshelf name';
 }
 
 
@@ -79,21 +80,31 @@ function getBooks(request, response) {
 }
 
 function getSingleBook(request, response){
-  console.log('__________From getSingleBook', request.params.id);
   let SQL = 'SELECT * FROM books WHERE id=$1;';
   let values = [request.params.id];
 
   return client.query(SQL, values)
     .then(result => {
-      console.log('_________this is the result from client.query',result.rows)
       return response.render('pages/books/show', { books : result.rows});
     })
     .catch(console.error);
 }
 
-//EVENT LISTENERS
+// function addToDatabase(request, response){
+//   console.log(request.body);
+//   let {title, author, ISBN, image_url, description, bookshelf} = request.body;
+//   console.log('REQUEST BODY_____', request.body);
 
-
+//   //Add book to database
+//   let SQL = 'INSERT INTO books(title, author, ISBN, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
+//   let values = [title, author, ISBN, image_url, description, bookshelf];
+//   client.query(SQL, values);
+  
+//   //Retrieve added book and send to front end
+//   let addedSQL = `SELECT FROM books WHERE title = ${title}`
+//   return client.query(addedSQL)
+//     .then(result => response.render('pages/books/detail', { books:  }))
+// }
 
 //new Book(bookResult.volumeInfo)
 // app.use('*', (request,response) => res.render('error'));
