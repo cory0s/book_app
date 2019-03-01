@@ -2,22 +2,13 @@
 <html lang="en">
 <head>
     <title>Book App</title>
-    <link rel="stylesheet" type="text/css" href="../public/styles/base.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/base.css"/>
 </head>
 <body>
     <main>
-        <h1>Returned Search</h1>
+        <h1>Your Books</h1>
         <h2>Number of books: <%= books.length %></h2>
-
-        <ul>
-            <%  books.forEach(book => { %>
-            <li> <%= book.title %>
-                <%= book.author %>
-                <button> <a href="/books/<%=book.id%>"> View Detail </a> </button>
-            </li>
-            <% }) %>
-        </ul>
- 
+        <%- include('./books/detail') %>
     </main>
 </body>
 </html>
