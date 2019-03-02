@@ -43,7 +43,6 @@ function Book(book){
 //HANDLER FUNCTIONS
 function proofOfLife (request, response) {
   response.render('pages/index');
-  // app.use(express.static('./public'));
 }
 
 function loadSearch(request, response) {
@@ -93,15 +92,10 @@ function addToDatabase(request, response){
   //Add book to database
   let SQL = 'INSERT INTO books(title, author, ISBN, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;';
   let values = [title, author, ISBN, image_url, description, bookshelf];
-  console.log('VALUES______', values);
 
   return client.query(SQL, values)
     .then(result=> response.redirect(`/books/${result.rows[0].id}`))
     .catch(console.error);
-
-  // return client.query('SELECT FROM books WHERE ISBN=$3;', [ISBN])
-  //   .then(result => console.log(result))
-  //   .catch(console.error);
 }
 
 // app.use('*', (request,response) => res.render('error'));
