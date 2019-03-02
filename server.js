@@ -1,3 +1,4 @@
+//Dependencies
 const express = require('express');
 const pg = require('pg');
 const superagent = require('superagent');
@@ -26,13 +27,13 @@ app.get('/newbooksearch', loadSearch);
 app.post('/searchResults', createSearch);
 app.get('/index', getBooks);
 app.get('/books/:id', getSingleBook);
-// app.post('/books', addToDatabase);
+app.post('/books', addToDatabase);
 
 //CONSTRUCTOR FUNCTIONS
 function Book(book){
   this.title = book.title || 'Title does not exist';
   this.author = book.authors || 'Author does not exist';
-  this.ISBN = book.ISBN || 'ISBN does not exist';
+  this.ISBN = book.industryIdentifiers[0].identifier || 'ISBN does not exist';
   this.image_url = book.imageLinks.smallThumbnail || 'Image does not exist';
   this.description = book.description || 'Description does not exist';
   this.bookshelf = 'Enter a bookshelf name';
@@ -57,13 +58,9 @@ function createSearch(request, response) {
   if(request.body.search[1] === 'author') {url += `+inauthor:${request.body.search[0]}`;}
   console.log(url);
 
-  function clickHandler() {
-    console.log('ive been clicked');
-  }
-
   superagent.get(url)
     .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
-    .then(results => response.render('pages/searches/show', { searchesResults: results, clickHandler: clickHandler }))
+    .then(results => response.render('pages/searches/show', { searchesResults: results }))
     .catch(err => response.render('pages/error', {errorMessage : err}))
 }
 
@@ -90,22 +87,22 @@ function getSingleBook(request, response){
     .catch(console.error);
 }
 
-// function addToDatabase(request, response){
-//   console.log(request.body);
-//   let {title, author, ISBN, image_url, description, bookshelf} = request.body;
-//   console.log('REQUEST BODY_____', request.body);
+function addToDatabase(request, response){
+  let {title, author, ISBN, image_url, description, bookshelf} = request.body;
 
-//   //Add book to database
-//   let SQL = 'INSERT INTO books(title, author, ISBN, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
-//   let values = [title, author, ISBN, image_url, description, bookshelf];
-//   client.query(SQL, values);
-  
-//   //Retrieve added book and send to front end
-//   let addedSQL = `SELECT FROM books WHERE title = ${title}`
-//   return client.query(addedSQL)
-//     .then(result => response.render('pages/books/detail', { books:  }))
-// }
+  //Add book to database
+  let SQL = 'INSERT INTO books(title, author, ISBN, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;';
+  let values = [title, author, ISBN, image_url, description, bookshelf];
+  console.log('VALUES______', values);
 
-//new Book(bookResult.volumeInfo)
+  return client.query(SQL, values)
+    .then(result=> response.redirect(`/books/${result.rows[0].id}`))
+    .catch(console.error);
+
+  // return client.query('SELECT FROM books WHERE ISBN=$3;', [ISBN])
+  //   .then(result => console.log(result))
+  //   .catch(console.error);
+}
+
 // app.use('*', (request,response) => res.render('error'));
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));
