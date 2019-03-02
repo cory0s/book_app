@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <title>Book App</title>
-    <link rel="stylesheet" type="text/css" href="../public/styles/base.css"/>
+    <link rel="stylesheet" type="text/css" href="../../styles/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="../../styles/base.css"/>
 </head>
 <body>
     <main>
         <h1>Details for Selected Book</h1>
-        <%- include('detail') %>
+        <%- include('detail', { books: books }) %>
         <button> <a href="/index"> My Books </a> </button>
     </main>
 </body>
