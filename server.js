@@ -3,8 +3,6 @@ const express = require('express');
 const pg = require('pg');
 const superagent = require('superagent');
 const app = express();
-// const cors = require('cors');
-// app.use(cors());
 require('dotenv').config();
 
 //Database setup
@@ -51,7 +49,6 @@ function loadSearch(request, response) {
 
 function createSearch(request, response) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
-  console.log('request.body', request.body);
 
   if(request.body.search[1] === 'title') {url += `+intitle:${request.body.search[0]}`;}
   if(request.body.search[1] === 'author') {url += `+inauthor:${request.body.search[0]}`;}
