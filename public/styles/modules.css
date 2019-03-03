@@ -1,0 +1,65 @@
+h1{
+    font-size: 40px;
+    font-style: bold;
+    text-align: center;
+    width: 60%;
+    margin: 0px auto;
+    border: #49484d 4px solid;
+    background-color: #557a95;
+    padding: 5px;
+    color: 
+}
+
+h2{
+    font-size: 20px;
+    margin: 5px;
+}
+
+p{
+    width: 75%;
+    text-align: center;
+    max-height: 200px;
+    overflow: scroll;
+    padding: 15px;
+    margin: 10px;
+}
+
+#search-result{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px auto 10px auto;
+    background-color: #557a95;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: #49484d 4px solid;
+}
+
+#book-details-form{
+    display: none;
+}
+
+#form-items{
+    display: flex;
+    flex-direction: column;
+}
+
+form{
+    width: 75%;
+    align-content: center;
+    background-color: #557a95;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+form button{
+    width: 50%;
+    margin: auto;
+}
+
+input{
+    width: 90%;
+    margin: 2px auto;
+}

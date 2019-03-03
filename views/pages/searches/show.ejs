@@ -2,26 +2,39 @@
 <html lang="en">
 <head>
     <title>Book App</title>
+    <link rel="stylesheet" type="text/css" href="./styles/reset.css"/>
     <link rel="stylesheet" type="text/css" href="./styles/base.css"/>
+    <link rel="stylesheet" type="text/css" href="./styles/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="./styles/modules.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Laila" rel="stylesheet">
 </head>
 <body>
     <main>
-        <h1>Returned Search</h1>
+        <h1>Search Results</h1>
 
             <%  searchesResults.forEach((book, index) => { %>
-            <div>
-            <%= book.title %>
+        <div id="search-result">
+
+            <h2><%= book.title %></h2>
+            <h2><%= book.author %></h2>
+            <img src=<%= book.image_url%>></img>
+            <p><%= book.description %></p>
             <button id="<%= index %>" class="book-details-button">View Book Details</button>
+
+            
             <form action="/books" method="post" class="<%= index %>" id="book-details-form">
-                <input name="title" value="<%=book.title%>"  placeholder="<%=book.title%>"></input>
-                <input name="author" value="<%=book.author%>" placeholder="<%=book.author%>"></input>
-                <input name="ISBN" value="<%=book.ISBN%>" placeholder="<%=book.ISBN%>" ></input>
-                <input name="image_url" value="<%=book.image_url%>" placeholder="<%=book.image_url%>" ></input>
-                <input name="description" value="<%=book.description%>" placeholder="<%=book.description%>" ></input>
-                <input name="bookshelf" value="<%=book.bookshelf%>" placeholder="<%=book.bookshelf%>" ></input>
-                <button type="submit">Add to My Books</button>
+                <div id="form-items"></div>
+                    <input name="title" value="<%=book.title%>"  placeholder="<%=book.title%>"></input>
+                    <input name="author" value="<%=book.author%>" placeholder="Author: <%=book.author%>"></input>
+                    <input name="ISBN" value="<%=book.ISBN%>" placeholder="ISBN: <%=book.ISBN%>" ></input>
+                    <input name="image_url" value="<%=book.image_url%>" placeholder="Image URL: <%=book.image_url%>" ></input>
+                    <input name="description" value="<%=book.description%>" placeholder="Description: <%=book.description%>" ></input>
+                    <input name="bookshelf" value="<%=book.bookshelf%>" placeholder="<%=book.bookshelf%>" ></input>
+                    <button type="submit">Add to My Books</button>
+                </div>
             </form>
-            </div>
+            
+        </div>
             <% }) %>
     </main>
 </body>
