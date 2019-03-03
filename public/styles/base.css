@@ -1,13 +1,10 @@
-/* body {
-    background-color: red;
-} */
-
-
 * {
     font-size: 15px;
-    background-color: white;
+    font-family: 'Laila', serif;
 } 
 
-#book-details-form{
-    display: none;
+body{
+    background-color: #B1A296;
+    background-image: url("../images/books.jpg");
+    background-size: contain;
 }
